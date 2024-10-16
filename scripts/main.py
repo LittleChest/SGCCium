@@ -5,7 +5,6 @@ import os
 import sys
 import time
 import traceback
-from datetime import datetime,timedelta
 
 import dotenv
 import schedule
