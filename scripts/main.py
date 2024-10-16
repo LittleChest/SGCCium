@@ -38,13 +38,13 @@ def main():
         sys.exit()
 
     logger_init(LOG_LEVEL)
-    logging.info(f"The current repository version is {VERSION}, and the repository address is https://github.com/ARC-MX/sgcc_electricity_new.git")
+    logging.info(f"The current repository version is {VERSION}, and the repository address is https://github.com/LittleChest/SGCCium.git")
 
     fetcher = DataFetcher(PHONE_NUMBER, PASSWORD)
     updator = SensorUpdator(HASS_URL, HASS_TOKEN)
-    logging.info(f"The current logged-in user name is {PHONE_NUMBER}, the homeassistant address is {HASS_URL}, and the program will be executed every hour.")
+    logging.info(f"The current logged-in user name is {PHONE_NUMBER}, the homeassistant address is {HASS_URL}, and the program will be executed every 6 hours.")
 
-    schedule.every(1).hours.do(run_task, fetcher, updator)
+    schedule.every(6).hours.do(run_task, fetcher, updator)
     run_task(fetcher, updator)
 
     while True:
