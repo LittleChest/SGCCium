@@ -43,12 +43,9 @@ def main():
 
     fetcher = DataFetcher(PHONE_NUMBER, PASSWORD)
     updator = SensorUpdator(HASS_URL, HASS_TOKEN)
-    logging.info(f"The current logged-in user name is {PHONE_NUMBER}, the homeassistant address is {HASS_URL}, and the program will be executed every day at {JOB_START_TIME}.")
+    logging.info(f"The current logged-in user name is {PHONE_NUMBER}, the homeassistant address is {HASS_URL}, and the program will be executed every hour.")
 
-    next_run_time = datetime.strptime(JOB_START_TIME, "%H:%M") + timedelta(hours=12)
-    logging.info(f'Run job now! The next run will be at {JOB_START_TIME} and {next_run_time.strftime("%H:%M")} every day')
-    schedule.every().day.at(JOB_START_TIME).do(run_task, fetcher, updator)
-    schedule.every().day.at(next_run_time.strftime("%H:%M")).do(run_task, fetcher, updator)
+    schedule.every(1).hours.do(run_task, fetcher, updator)
     run_task(fetcher, updator)
 
     while True:
